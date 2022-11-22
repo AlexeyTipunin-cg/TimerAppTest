@@ -1,12 +1,26 @@
 ﻿
 using System;
+using UnityEngine;
 
 public class AppTimer
 {
     private int _timeInSec;
+    public DateTime finishTime;
     public Action<int> onUpdate;
     public Action onStop;
     public bool isStopped => _timeInSec <= 0;
+
+    public AppTimer()
+    {
+
+    }
+
+    public AppTimer(DateTime date)
+    {
+        finishTime = date;
+        int secInterval = (int)(date - DateTime.Now).TotalSeconds;
+        _timeInSec = secInterval < 0 ? 0 : secInterval;
+    }
 
     public int time
     {
@@ -20,6 +34,7 @@ public class AppTimer
             _timeInSec = value;
             if (isStopped)
             {
+                finishTime = default;
                 onStop?.Invoke();
             }
             onUpdate?.Invoke(_timeInSec);

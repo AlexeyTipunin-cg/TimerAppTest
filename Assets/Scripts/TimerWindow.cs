@@ -33,6 +33,11 @@ public class TimerWindow : MonoBehaviour
             _addBtn.gameObject.SetActive(false);
             _decreaseBtn.gameObject.SetActive(false);
         }
+        else
+        {
+            _addBtn.gameObject.SetActive(true);
+            _decreaseBtn.gameObject.SetActive(true);
+        }
     }
 
     private void OnDisable()
@@ -54,7 +59,7 @@ public class TimerWindow : MonoBehaviour
 
     private void StartTimer()
     {
-        if (_controller.timer.isStopped)
+        if (_controller.timer.isStopped && _timeToAdd != 0)
         {
             _controller.LaunchTimer(_timeToAdd);
         }

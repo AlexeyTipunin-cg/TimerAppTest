@@ -14,6 +14,8 @@ public class ScreenButtonController : MonoBehaviour
     public string getTimerString => _timer.GetString();
     public int time => _timer.time;
 
+    private int _index;
+
     public void OnUdapteAdd(Action<int> action)
     {
         _timer.onUpdate += action;
@@ -24,14 +26,14 @@ public class ScreenButtonController : MonoBehaviour
         _timer.onUpdate -= action;
     }
 
-
-    private void Start()
+    public void Init(AppTimer timer, int index)
     {
-        _timer = new AppTimer();
-        AppInit.core.timerStorage.timers.Add(_timer);
+        _timer = timer;
+        _index = index;
+        AppInit.core.timerStorage.AddTimer(_timer);
+
         _timer.onStop += Stop;
         _btn.onClick.AddListener(OnButtonClick);
-
     }
 
     public void SetButtonText(string text)
@@ -41,7 +43,9 @@ public class ScreenButtonController : MonoBehaviour
 
     public void LaunchTimer(int sec)
     {
+        _timer.finishTime = DateTime.Now + TimeSpan.FromSeconds(sec);
         _timer.time = sec;
+        AppInit.core.timerStorage.SaveTimers();
     }
 
     private void Stop()

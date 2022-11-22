@@ -1,9 +1,10 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class AppInit : MonoBehaviour
 {
+    [SerializeField] private int timersOnStart = 3;
     [SerializeField] private RectTransform _layout;
     [SerializeField] private GameObject _buttonPrefab;
     [SerializeField] private GameObject _buttonDummyPrefab;
@@ -32,24 +33,52 @@ public class AppInit : MonoBehaviour
     private void Start()
     {
         _addTimerButton.onClick.AddListener(AddTimer);
-        CreateButtons();
+        var data = SaveManager.GetData();
+        if (data.Count > 0)
+        {
+            CreateButtonsFromData(data);
+        }
+        else
+        {
+            CreateButtons();
+        }
+    }
+
+    private void CreateButtonsFromData(List<DateTime> timerEndDates)
+    {
+        var transforms = new List<RectTransform>();
+        for (int i = 0; i < timerEndDates.Count; i++)
+        {
+            var dummy = Instantiate(_buttonDummyPrefab, _layout);
+            transforms.Add((RectTransform)dummy.transform);
+        }
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_layout);
+
+        _buttonWidth = _buttonPrefab.GetComponent<RectTransform>().rect.width;
+
+        for (int i = 0; i < timerEndDates.Count; i++)
+        {
+            CreateButton(transforms[i], new AppTimer(timerEndDates[i]));
+        }
     }
 
     private void CreateButtons()
     {
+        var transforms = new List<RectTransform>();
+        for (int i = 0; i < timersOnStart; i++)
+        {
+            var dummy = Instantiate(_buttonDummyPrefab, _layout);
+            transforms.Add((RectTransform)dummy.transform);
+        }
+
         LayoutRebuilder.ForceRebuildLayoutImmediate(_layout);
 
         _buttonWidth = _buttonPrefab.GetComponent<RectTransform>().rect.width;
-        var transforms = new List<RectTransform>();
 
-        for (int i = 0; i < _layout.childCount; i++)
+        for (int i = 0; i < timersOnStart; i++)
         {
-            transforms.Add((RectTransform)_layout.GetChild(i));
-        }
-
-        for (int i = 0; i < 3; i++)
-        {
-            CreateButton(transforms[i]);
+            CreateButton(transforms[i], new AppTimer());
         }
     }
 
@@ -59,15 +88,19 @@ public class AppInit : MonoBehaviour
         LayoutRebuilder.ForceRebuildLayoutImmediate(_layout);
         _parent.sizeDelta = _layout.sizeDelta;
 
-        CreateButton((RectTransform)dummy.transform);
+        CreateButton((RectTransform)dummy.transform, new AppTimer());
     }
 
-    private void CreateButton(RectTransform transform)
+    private void CreateButton(RectTransform transform, AppTimer timer)
     {
         var gameObject = Instantiate(_buttonPrefab, _parent);
         var tr = (RectTransform)gameObject.transform;
         tr.anchoredPosition = new Vector3(-0.5f * _buttonWidth * _totalTimers - 0.5f * _buttonWidth, transform.anchoredPosition.y, 0);
-        gameObject.GetComponent<ScreenButtonController>().SetButtonText($"Timer {_totalTimers + 1}");
+        var screenButtonController = gameObject.GetComponent<ScreenButtonController>();
+
+
+        screenButtonController.Init(timer, _totalTimers);
+        screenButtonController.SetButtonText($"Timer {_totalTimers + 1}");
         LeanTween.moveX(gameObject, transform.anchoredPosition.x, 1f).setEaseOutBounce().setDelay(0.3f);
         _totalTimers++;
     }

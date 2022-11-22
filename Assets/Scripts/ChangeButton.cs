@@ -17,9 +17,9 @@ public class ChangeButton : Button
     {
 
         base.OnPointerDown(eventData);
-        onPointerDown?.Invoke();
         _isPressed = true;
         _elapsedTime = 0;
+        onPointerDown?.Invoke();
         StartCoroutine(CountElapsedTime());
     }
 
