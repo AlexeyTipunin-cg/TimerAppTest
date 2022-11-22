@@ -3,36 +3,37 @@ using System;
 
 public class AppTimer
 {
-    private int _time;
+    private int _timeInSec;
     public event Action<int> updated;
     public event Action stopped;
-    public bool isStopped => _time <= 0;
+    public bool isStopped => _timeInSec <= 0;
 
     public int time
     {
         get
         {
-            return _time;
+            return _timeInSec;
         }
 
         set
         {
-            _time = value;
+            _timeInSec = value;
             if (isStopped)
             {
                 stopped?.Invoke();
             }
-            updated?.Invoke(_time);
+            updated?.Invoke(_timeInSec);
         }
     }
 
     public string GetString()
     {
-        if (isStopped)
-        {
-            return "00:00:00";
-        }
-        return _time.ToString();
+        //if (isStopped)
+        //{
+        //    return "00:00:00";
+        //}
+
+        return TimeSpan.FromSeconds(_timeInSec).ToString(@"hh\:mm\:ss");
     }
 }
 

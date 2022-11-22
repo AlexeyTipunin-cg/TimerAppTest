@@ -10,7 +10,7 @@ public class ChangeButton : Button
     public event Action onPointerUp;
     public event Action onPointerDown;
 
-    public float _reactionTime = 1f;
+    public float _reactionTime = 0.5f;
     private bool _isPressed;
     private float _elapsedTime;
     public override void OnPointerDown(PointerEventData eventData)

@@ -10,6 +10,7 @@ public class ScreenButtonController : MonoBehaviour
     private AppTimer _timerData;
 
     public string getTimerString => _timerData.GetString();
+    public int time => _timerData.time;
 
     private void Start()
     {
@@ -21,14 +22,19 @@ public class ScreenButtonController : MonoBehaviour
 
     }
 
-    private void Stop()
+    public void SetButtonText(string text)
     {
-        _image.color = new Color(0, 1, 0.410291f, 1);
+        _text.text = text;
     }
 
     public void LaunchTimer(int sec)
     {
         _timerData.time = sec;
+    }
+
+    private void Stop()
+    {
+        _image.color = new Color(0, 1, 0.410291f, 1);
     }
 
 

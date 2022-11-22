@@ -18,7 +18,7 @@ public class TimerStorage : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSecondsRealtime(1f);
+            yield return new WaitForSeconds(1f);
 
             foreach (var item in timers)
             {
@@ -27,7 +27,7 @@ public class TimerStorage : MonoBehaviour
                     continue;
                 }
 
-                item.time -= 1;
+                item.time--;
             }
         }
     }

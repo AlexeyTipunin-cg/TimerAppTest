@@ -11,7 +11,7 @@ public class TimerWindow : MonoBehaviour
     [SerializeField] private TMP_Text _timerText;
 
     private ScreenButtonController _controller;
-    private TimeSpan _timeToAdd;
+    private int _timeToAdd;
 
     void Start()
     {
@@ -24,59 +24,54 @@ public class TimerWindow : MonoBehaviour
     {
         _controller = controller;
         _timerText.text = controller.getTimerString;
+        _timeToAdd = controller.time;
     }
-
-
 
     private void StartTimer()
     {
-        _controller.LaunchTimer((int)_timeToAdd.TotalSeconds);
+        _controller.LaunchTimer(_timeToAdd);
         AppInit.windowsController.CloseTimerWindow();
     }
 
     private void AddTime(float value)
     {
-        TimeSpan time = GetTimeSpine(value);
-        Debug.Log(_timeToAdd);
-
-        _timeToAdd += time;
-        _timeToAdd = _timeToAdd.Duration();
-
-        _timerText.text = _timeToAdd.ToString(@"hh\:mm\:ss");
+        int time = _timeToAdd + GetTimeSpine(value);
+        SetTime(time);
     }
 
     private void DecreaseTime(float value)
     {
-        TimeSpan time = GetTimeSpine(value);
-
-        _timeToAdd -= time;
-        _timeToAdd = _timeToAdd.Duration();
-        Debug.Log(_timeToAdd);
-
-        _timerText.text = _timeToAdd.Duration().ToString(@"hh\:mm\:ss");
+        int time = _timeToAdd - GetTimeSpine(value);
+        SetTime(time);
     }
 
-    private TimeSpan GetTimeSpine(float value)
+    private void SetTime(int value)
     {
-        TimeSpan time;
-        if (value == 0)
+        _timeToAdd = Mathf.Clamp(value, 0, 24 * 3600);
+        var ts = TimeSpan.FromSeconds(_timeToAdd);
+        if (ts.Days == 1)
         {
-            time = TimeSpan.FromSeconds(1);
+            _timerText.text = "24:00:00";
         }
         else
         {
-            time = TimeSpan.FromSeconds(Mathf.Pow(value, 1.5f));
+            _timerText.text = ts.ToString(@"hh\:mm\:ss");
+        }
+    }
+
+
+    private int GetTimeSpine(float value)
+    {
+        int time;
+        if (value == 0)
+        {
+            time = 1;
+        }
+        else
+        {
+            time = Mathf.CeilToInt(Mathf.Exp(value));
         }
 
         return time;
-    }
-
-    private (int hours, int min, int sec) ConvertTimeFromSeconds(float sec)
-    {
-        int h = Mathf.FloorToInt(sec / 3600);
-        sec -= h * 3600;
-        int min = Mathf.FloorToInt(sec / 60);
-        sec -= min * 60;
-        return (h, min, (int)sec);
     }
 }
