@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 3873906584831630632}
   - component: {fileID: 3873906584831630637}
   - component: {fileID: 3873906584831630634}
-  - component: {fileID: 3873906584831630635}
+  - component: {fileID: 2043770012435318859}
   m_Layer: 5
   m_Name: DecreaseBtn
   m_TagString: Untagged
@@ -345,7 +345,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3873906584831630635
+--- !u!114 &2043770012435318859
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -354,7 +354,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3873906584831630633}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 3545e4f8db219e04e928f4c30457ef80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 3873906585037559761}
   - component: {fileID: 3873906585037559762}
   - component: {fileID: 3873906585037559763}
-  - component: {fileID: 3873906585037559760}
+  - component: {fileID: 4654172268646037374}
   m_Layer: 5
   m_Name: AddBtn
   m_TagString: Untagged
@@ -616,7 +616,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3873906585037559760
+--- !u!114 &4654172268646037374
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -625,7 +625,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3873906585037559726}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 3545e4f8db219e04e928f4c30457ef80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -746,7 +746,7 @@ GameObject:
   - component: {fileID: 3873906585887687684}
   - component: {fileID: 3873906585887687689}
   - component: {fileID: 3873906585887687686}
-  - component: {fileID: 3873906585887687687}
+  - component: {fileID: 7604382097959134537}
   m_Layer: 5
   m_Name: LaunchBtn
   m_TagString: Untagged
@@ -812,7 +812,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3873906585887687687
+--- !u!114 &7604382097959134537
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -821,7 +821,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3873906585887687685}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 3545e4f8db219e04e928f4c30457ef80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -906,9 +906,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1f5a13d9443ef9419c2760fe2e6ef45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _addBtn: {fileID: 3873906585037559760}
-  _decreaseBtn: {fileID: 3873906584831630635}
-  _startBtn: {fileID: 3873906585887687687}
+  _addBtn: {fileID: 0}
+  _decreaseBtn: {fileID: 0}
+  _startBtn: {fileID: 0}
   _timerText: {fileID: 3873906586371230703}
 --- !u!1 &3873906586113832719
 GameObject:

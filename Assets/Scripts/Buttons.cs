@@ -7,8 +7,18 @@ public class Buttons : MonoBehaviour
     [SerializeField] private VerticalLayoutGroup _layout;
     [SerializeField] private GameObject _prefab;
     [SerializeField] private GameObject _parent;
+    [SerializeField] private TimerWindow _timerWindow;
+
+    public static WindowsController _windowsController;
+    public static WindowsController windowsController => _windowsController;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
+    {
+        _windowsController = new WindowsController(_timerWindow);
+        CreateButtons();
+    }
+
+    private void CreateButtons()
     {
         LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)_layout.transform);
 
