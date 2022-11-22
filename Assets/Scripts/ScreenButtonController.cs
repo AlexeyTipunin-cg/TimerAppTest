@@ -1,23 +1,35 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class ScreenButtonController : MonoBehaviour
 {
     [SerializeField] private Button _btn;
     [SerializeField] private Image _image;
     [SerializeField] private TMP_Text _text;
-    private AppTimer _timerData;
+    private AppTimer _timer;
 
-    public string getTimerString => _timerData.GetString();
-    public int time => _timerData.time;
+    public AppTimer timer => _timer;
+    public string getTimerString => _timer.GetString();
+    public int time => _timer.time;
+
+    public void OnUdapteAdd(Action<int> action)
+    {
+        _timer.onUpdate += action;
+    }
+
+    public void RemoveSubscription(Action<int> action)
+    {
+        _timer.onUpdate -= action;
+    }
+
 
     private void Start()
     {
-        _timerData = new AppTimer();
-        AppInit.core.timerStorage.timers.Add(_timerData);
-        //_timerData.updated += UpdateTimeText;
-        _timerData.stopped += Stop;
+        _timer = new AppTimer();
+        AppInit.core.timerStorage.timers.Add(_timer);
+        _timer.onStop += Stop;
         _btn.onClick.AddListener(OnButtonClick);
 
     }
@@ -29,7 +41,7 @@ public class ScreenButtonController : MonoBehaviour
 
     public void LaunchTimer(int sec)
     {
-        _timerData.time = sec;
+        _timer.time = sec;
     }
 
     private void Stop()

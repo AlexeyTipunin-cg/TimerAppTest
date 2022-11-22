@@ -25,11 +25,40 @@ public class TimerWindow : MonoBehaviour
         _controller = controller;
         _timerText.text = controller.getTimerString;
         _timeToAdd = controller.time;
+        _controller.timer.onUpdate += UpdateText;
+        _controller.timer.onStop += OnTimerStop;
+
+        if (!_controller.timer.isStopped)
+        {
+            _addBtn.gameObject.SetActive(false);
+            _decreaseBtn.gameObject.SetActive(false);
+        }
+    }
+
+    private void OnDisable()
+    {
+        _controller.timer.onUpdate -= UpdateText;
+        _controller.timer.onStop -= OnTimerStop;
+    }
+
+    private void OnTimerStop()
+    {
+        _addBtn.gameObject.SetActive(true);
+        _decreaseBtn.gameObject.SetActive(true);
+    }
+
+    private void UpdateText(int value)
+    {
+        _timerText.text = _controller.getTimerString;
     }
 
     private void StartTimer()
     {
-        _controller.LaunchTimer(_timeToAdd);
+        if (_controller.timer.isStopped)
+        {
+            _controller.LaunchTimer(_timeToAdd);
+        }
+
         AppInit.windowsController.CloseTimerWindow();
     }
 
