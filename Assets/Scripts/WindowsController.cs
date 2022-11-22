@@ -11,10 +11,12 @@ public class WindowsController
         _timerWindow = window;
         _canvasGroup = window.GetComponent<CanvasGroup>();
     }
-    public void OpenTimerWindow()
+    public void OpenTimerWindow(ScreenButtonController controller)
     {
+
         _canvasGroup.alpha = 0;
         _timerWindow.gameObject.SetActive(true);
+        _timerWindow.Init(controller);
         LeanTween.alphaCanvas(_canvasGroup, 1, _fadeTime);
 
     }

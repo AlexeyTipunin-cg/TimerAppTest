@@ -2,19 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class Buttons : MonoBehaviour
+public class AppInit : MonoBehaviour
 {
     [SerializeField] private VerticalLayoutGroup _layout;
     [SerializeField] private GameObject _prefab;
     [SerializeField] private GameObject _parent;
     [SerializeField] private TimerWindow _timerWindow;
+    [SerializeField] private TimerStorage _timerStorage;
 
-    public static WindowsController _windowsController;
+    private static WindowsController _windowsController;
     public static WindowsController windowsController => _windowsController;
-    // Start is called before the first frame update
+
+    public static Core core;
+
+    public TimerStorage GetTimerStorage()
+    {
+        return _timerStorage;
+    }
+
+
+
+    private void Awake()
+    {
+        Application.runInBackground = true;
+        _windowsController = new WindowsController(_timerWindow);
+        core = new Core(_timerStorage);
+    }
+
     private void Start()
     {
-        _windowsController = new WindowsController(_timerWindow);
         CreateButtons();
     }
 

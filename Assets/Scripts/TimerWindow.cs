@@ -1,32 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.EventSystems;
 using System;
 
 public class TimerWindow : MonoBehaviour
 {
-    [SerializeField] private MyButton _addBtn;
-    [SerializeField] private MyButton _decreaseBtn;
+    [SerializeField] private ChangeButton _addBtn;
+    [SerializeField] private ChangeButton _decreaseBtn;
     [SerializeField] private Button _startBtn;
     [SerializeField] private TMP_Text _timerText;
 
+    private ScreenButtonController _controller;
     private TimeSpan _timeToAdd;
 
     void Start()
     {
-        _addBtn.onClick.AddListener(AddTime);
         _startBtn.onClick.AddListener(StartTimer);
-        _decreaseBtn.onClick.AddListener(DecreaseTime);
         _addBtn.onTimeChange += AddTime;
         _decreaseBtn.onTimeChange += DecreaseTime;
     }
 
+    public void Init(ScreenButtonController controller)
+    {
+        _controller = controller;
+        _timerText.text = controller.getTimerString;
+    }
+
+
+
     private void StartTimer()
     {
-        Buttons.windowsController.CloseTimerWindow();
+        _controller.LaunchTimer((int)_timeToAdd.TotalSeconds);
+        AppInit.windowsController.CloseTimerWindow();
     }
 
     private void AddTime(float value)
@@ -73,20 +78,5 @@ public class TimerWindow : MonoBehaviour
         int min = Mathf.FloorToInt(sec / 60);
         sec -= min * 60;
         return (h, min, (int)sec);
-    }
-
-    private void AddTime()
-    {
-
-    }
-
-    private void DecreaseTime()
-    {
-
-    }
-
-    void Update()
-    {
-
     }
 }

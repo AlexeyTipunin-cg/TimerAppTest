@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using System;
 using UnityEngine;
 
-public class MyButton : Button
+public class ChangeButton : Button
 {
     public event Action<float> onTimeChange;
     public event Action onPointerUp;

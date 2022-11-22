@@ -681,6 +681,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2034004200}
   - component: {fileID: 2034004201}
+  - component: {fileID: 2034004202}
   m_Layer: 5
   m_Name: MainScreen
   m_TagString: Untagged
@@ -725,6 +726,19 @@ MonoBehaviour:
   _prefab: {fileID: 6110458184717937297, guid: 157ad77d3557b2a499ae114f277b4035, type: 3}
   _parent: {fileID: 2034004199}
   _timerWindow: {fileID: 724889081}
+  _timerStorage: {fileID: 2034004202}
+--- !u!114 &2034004202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2034004199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18546662dff2a494abc3879d45352243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2063052471
 GameObject:
   m_ObjectHideFlags: 0
