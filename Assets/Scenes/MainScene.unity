@@ -1058,6 +1058,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3545e4f8db219e04e928f4c30457ef80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1472667009 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3873906584483066955, guid: 6d054ac3bd4a7fe4692501ffec950b52, type: 3}
+  m_PrefabInstance: {fileID: 3873906586383087121}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1602418693
 GameObject:
   m_ObjectHideFlags: 0
@@ -1296,6 +1307,10 @@ PrefabInstance:
       propertyPath: _decreaseBtn
       value: 
       objectReference: {fileID: 1871145786}
+    - target: {fileID: 3873906585962814440, guid: 6d054ac3bd4a7fe4692501ffec950b52, type: 3}
+      propertyPath: _startButtonText
+      value: 
+      objectReference: {fileID: 1472667009}
     - target: {fileID: 3873906585962814441, guid: 6d054ac3bd4a7fe4692501ffec950b52, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
