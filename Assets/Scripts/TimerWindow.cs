@@ -9,6 +9,7 @@ public class TimerWindow : MonoBehaviour
     [SerializeField] private ChangeButton _decreaseBtn;
     [SerializeField] private Button _startBtn;
     [SerializeField] private TMP_Text _timerText;
+    [SerializeField] private TMP_Text _startButtonText;
 
     private ScreenButtonController _controller;
     private int _timeToAdd;
@@ -18,6 +19,27 @@ public class TimerWindow : MonoBehaviour
         _startBtn.onClick.AddListener(StartTimer);
         _addBtn.onTimeChange += AddTime;
         _decreaseBtn.onTimeChange += DecreaseTime;
+    }
+
+    private void OnDestroy()
+    {
+        _addBtn.onTimeChange -= AddTime;
+        _decreaseBtn.onTimeChange -= DecreaseTime;
+
+        if (_controller != null && _controller.timer != null)
+        {
+            _controller.timer.onUpdate -= UpdateText;
+            _controller.timer.onStop -= OnTimerStop;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (_controller != null && _controller.timer != null)
+        {
+            _controller.timer.onUpdate -= UpdateText;
+            _controller.timer.onStop -= OnTimerStop;
+        }
     }
 
     public void Init(ScreenButtonController controller)
@@ -32,18 +54,14 @@ public class TimerWindow : MonoBehaviour
         {
             _addBtn.gameObject.SetActive(false);
             _decreaseBtn.gameObject.SetActive(false);
+            _startButtonText.text = "Close";
         }
         else
         {
             _addBtn.gameObject.SetActive(true);
             _decreaseBtn.gameObject.SetActive(true);
+            _startButtonText.text = "Start";
         }
-    }
-
-    private void OnDisable()
-    {
-        _controller.timer.onUpdate -= UpdateText;
-        _controller.timer.onStop -= OnTimerStop;
     }
 
     private void OnTimerStop()

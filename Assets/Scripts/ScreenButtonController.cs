@@ -14,8 +14,6 @@ public class ScreenButtonController : MonoBehaviour
     public string getTimerString => _timer.GetString();
     public int time => _timer.time;
 
-    private int _index;
-
     public void OnUdapteAdd(Action<int> action)
     {
         _timer.onUpdate += action;
@@ -26,10 +24,9 @@ public class ScreenButtonController : MonoBehaviour
         _timer.onUpdate -= action;
     }
 
-    public void Init(AppTimer timer, int index)
+    public void Init(AppTimer timer)
     {
         _timer = timer;
-        _index = index;
         AppInit.core.timerStorage.AddTimer(_timer);
 
         _timer.onStop += Stop;
