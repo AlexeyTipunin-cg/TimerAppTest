@@ -11,6 +11,7 @@ public class ChangeButton : Button
     public event Action onPointerDown;
 
     public float _reactionTime = 0.5f;
+    public float _updateTime = 0.1f;
     private bool _isPressed;
     private float _elapsedTime;
     public override void OnPointerDown(PointerEventData eventData)
@@ -40,7 +41,7 @@ public class ChangeButton : Button
         {
             _elapsedTime = Time.time - startTime;
             onTimeChange?.Invoke(_elapsedTime);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(_updateTime);
         }
     }
 }
