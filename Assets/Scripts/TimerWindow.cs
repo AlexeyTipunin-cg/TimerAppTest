@@ -68,6 +68,8 @@ public class TimerWindow : MonoBehaviour
     {
         _addBtn.gameObject.SetActive(true);
         _decreaseBtn.gameObject.SetActive(true);
+        _startButtonText.text = "Start";
+        _timeToAdd = 0;
     }
 
     private void UpdateText(int value)
@@ -77,6 +79,8 @@ public class TimerWindow : MonoBehaviour
 
     private void StartTimer()
     {
+        _controller.OnStartButtonPress();
+
         if (_controller.timer.isStopped && _timeToAdd != 0)
         {
             _controller.LaunchTimer(_timeToAdd);

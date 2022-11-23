@@ -42,6 +42,11 @@ public class TimerController : MonoBehaviour
         AppInit.core.timerStorage.SaveTimers();
     }
 
+    public void OnStartButtonPress()
+    {
+        _image.color = white;
+    }
+
     private void Stop()
     {
         _image.color = _onFinishColor;
