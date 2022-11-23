@@ -121,7 +121,7 @@ public class TimerWindow : MonoBehaviour
         }
         else
         {
-            time = Mathf.CeilToInt(Mathf.Exp(value));
+            time = (int)Mathf.Pow(10, value);
         }
 
         return time;

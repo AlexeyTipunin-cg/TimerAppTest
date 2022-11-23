@@ -34,12 +34,13 @@ public class ChangeButton : Button
     {
         onTimeChange?.Invoke(_elapsedTime);
         yield return new WaitForSeconds(_reactionTime);
+        var startTime = Time.time;
 
         while (_isPressed)
         {
-            _elapsedTime += Time.deltaTime;
+            _elapsedTime = Time.time - startTime;
             onTimeChange?.Invoke(_elapsedTime);
-            yield return null;
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }
