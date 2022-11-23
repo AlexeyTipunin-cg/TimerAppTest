@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public class AppTimer
 {
@@ -30,7 +31,7 @@ public class AppTimer
 
         set
         {
-            _timeInSec = value;
+            _timeInSec = Mathf.Max(0, value);
             if (isStopped)
             {
                 finishTime = default;

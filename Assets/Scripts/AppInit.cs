@@ -12,7 +12,7 @@ public class AppInit : MonoBehaviour
 
     [SerializeField] private RectTransform _parent;
     [SerializeField] private TimerWindow _timerWindow;
-    [SerializeField] private TimerStorage _timerStorage;
+    [SerializeField] private TimersUpdater _timerStorage;
 
     [SerializeField] private Button _addTimerButton;
 
@@ -26,7 +26,6 @@ public class AppInit : MonoBehaviour
 
     private void Awake()
     {
-        Application.runInBackground = true;
         _windowsController = new WindowsController(_timerWindow);
         core = new Core(_timerStorage);
     }
