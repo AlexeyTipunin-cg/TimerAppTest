@@ -2,10 +2,11 @@
 
 public class AppTimer
 {
-    private int _timeInSec;
     public DateTime finishTime;
     public Action<int> onUpdate;
     public Action onStop;
+    private int _timeInSec;
+
     public bool isStopped => _timeInSec <= 0;
 
     public AppTimer()
