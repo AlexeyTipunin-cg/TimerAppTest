@@ -11,7 +11,7 @@ public class TimerWindow : MonoBehaviour
     [SerializeField] private TMP_Text _timerText;
     [SerializeField] private TMP_Text _startButtonText;
 
-    private ScreenButtonController _controller;
+    private TimerController _controller;
     private int _timeToAdd;
 
     void Start()
@@ -42,7 +42,7 @@ public class TimerWindow : MonoBehaviour
         }
     }
 
-    public void Init(ScreenButtonController controller)
+    public void Init(TimerController controller)
     {
         _controller = controller;
         _timerText.text = controller.getTimerString;

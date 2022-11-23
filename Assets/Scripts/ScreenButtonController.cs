@@ -3,32 +3,29 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-public class ScreenButtonController : MonoBehaviour
+public class TimerController : MonoBehaviour
 {
     [SerializeField] private Button _btn;
     [SerializeField] private Image _image;
     [SerializeField] private TMP_Text _text;
+    [SerializeField] private Color _onFinishColor = new Color(0, 1, 0.410291f, 1);
+    private Color white = Color.white;
     private AppTimer _timer;
+
 
     public AppTimer timer => _timer;
     public string getTimerString => _timer.GetString();
     public int time => _timer.time;
 
-    public void OnUdapteAdd(Action<int> action)
+    private void OnDestroy()
     {
-        _timer.onUpdate += action;
-    }
-
-    public void RemoveSubscription(Action<int> action)
-    {
-        _timer.onUpdate -= action;
+        _timer.onStop -= Stop;
     }
 
     public void Init(AppTimer timer)
     {
         _timer = timer;
         AppInit.core.timerStorage.AddTimer(_timer);
-
         _timer.onStop += Stop;
         _btn.onClick.AddListener(OnButtonClick);
     }
@@ -47,13 +44,13 @@ public class ScreenButtonController : MonoBehaviour
 
     private void Stop()
     {
-        _image.color = new Color(0, 1, 0.410291f, 1);
+        _image.color = _onFinishColor;
     }
 
 
     private void OnButtonClick()
     {
-        _image.color = Color.white;
+        _image.color = white;
         AppInit.windowsController?.OpenTimerWindow(this);
     }
 }

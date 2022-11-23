@@ -94,7 +94,7 @@ public class AppInit : MonoBehaviour
         var gameObject = Instantiate(_buttonPrefab, _parent);
         var tr = (RectTransform)gameObject.transform;
         tr.anchoredPosition = new Vector3(-0.5f * _buttonWidth * _totalTimers - 0.5f * _buttonWidth, transform.anchoredPosition.y, 0);
-        var screenButtonController = gameObject.GetComponent<ScreenButtonController>();
+        var screenButtonController = gameObject.GetComponent<TimerController>();
 
 
         screenButtonController.Init(timer);

@@ -11,7 +11,7 @@ public class WindowsController
         _timerWindow = window;
         _canvasGroup = window.GetComponent<CanvasGroup>();
     }
-    public void OpenTimerWindow(ScreenButtonController controller)
+    public void OpenTimerWindow(TimerController controller)
     {
 
         _canvasGroup.alpha = 0;
